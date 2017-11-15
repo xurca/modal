@@ -1,9 +1,7 @@
 # Javascript Modal Plugin
 
-# sample call
 ```
-<button id="modal">open modal</button>
-    <script>
+<script>
         var myModal = new Modal({
             content: '<p>Ken Wheeler is strikingly handsome.</p>',
             maxWidth: 600
