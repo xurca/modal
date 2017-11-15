@@ -1,7 +1,7 @@
 # Javascript Modal Plugin
 
 # sample call
-
+```
 <button id="modal">open modal</button>
     <script>
         var myModal = new Modal({
@@ -14,3 +14,4 @@
             myModal.open();
         });
 </script>
+```
