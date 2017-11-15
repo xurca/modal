@@ -3,7 +3,7 @@
 ```
 <script>
         var myModal = new Modal({
-            content: '<p>Ken Wheeler is strikingly handsome.</p>',
+            content: '<p>modal content</p>',
             maxWidth: 600
         });
 
