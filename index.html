@@ -6,10 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="modal.js"></script>
+    <link href="styles.css" rel="stylesheet" />
 </head>
 
 <body>
+    <button id="modal"></button>
+    <script>
+        var myModal = new Modal({
+            content: '<p>Ken Wheeler is strikingly handsome.</p>',
+            maxWidth: 600
+        });
 
+        var el = document.getElementById('modal');
+        el.addEventListener('click', function () {
+            myModal.open();
+        });
+    </script>
 </body>
 
 </html>

@@ -7,6 +7,9 @@
         this.modal = null;
         this.overlay = null;
 
+        // Determine proper prefix
+        this.transitionEnd = transitionSelect();
+
         var defaults = {
             className: '',
             closeButton: true,
@@ -24,8 +27,45 @@
     // Public Methods
 
     Modal.prototype.open = function () {
+        // Build out Modal
+        buildOut.call(this);
 
+        //Initialize event listeners
+        initializeEvents.call(this);
 
+        /**
+         * After adding elements to the DOM, use getComputedStyle
+         * to force the browser to recalc and recognize the elements
+         * that we just added. This is so that CSS animation has a start point 
+         */
+        window.getComputedStyle(this.modal).height;//TODO:CHECK
+
+        /**
+         * Add our open class and check if the modal is taller than the window
+         * If so, our anchored class is also applied
+         */
+        this.modal.className = this.modal.className +
+            (this.modal.offsetHeight > window.innerHeight ?
+                ' scotch-open scotch-anchored' : ' scotch-open');
+        this.overlay.className += ' scotch-open';
+    };
+
+    Modal.prototype.close = function () {
+        var $this = this;
+
+        // Remove the open class name
+        this.modal.className = this.modal.className.replace(' scotch-open', '');
+        this.overlay.className = this.overlay.className.replace(' scotch-open', '');
+
+        this.modal.addEventListener(this.transitionEnd, function () {
+            $this.modal.parentNode.removeChild($this.modal);
+        });
+
+        this.overlay.addEventListener(this.transitionEnd, function () {
+            if ($this.overlay.parentNode) {
+                $this.overlay.parentNode.removeChild($this.overlay);
+            }
+        })
     };
 
     // Private Methods
@@ -57,7 +97,7 @@
         // If closeButton option is true, add a close button
         if (this.options.closeButton === true) {
             this.closeButton = document.createElement('button');
-            this.closeButton.className = "scotch-close close-button";
+            this.closeButton.className = 'scotch-close close-button';
             this.closeButton.innerHTML = 'x';
             this.modal.appendChild(this.closeButton);
         }
@@ -90,6 +130,14 @@
         if (this.overlay) {
             this.overlay.addEventListener('click', this.close.bind(this));
         }
+    }
+
+    // Utility method to determine which transistionend event is supported
+    function transitionSelect() {
+        var el = document.createElement("div");
+        if (el.style.WebkitTransition) return "webkitTransitionEnd";
+        if (el.style.OTransition) return "oTransitionEnd";
+        return 'transitionend';
     }
 
     // Utility method to extend defaults with user options
