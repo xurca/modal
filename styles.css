@@ -166,3 +166,26 @@
          -o-transition: 500ms opacity 500ms ease;
             transition: 500ms opacity 500ms ease;
 }
+
+.scotch-modal.custom-animation 
+{
+    -webkit-transition: 1ms -webkit-transform ease;
+         -moz-transition: 1ms    -moz-transform ease;
+          -ms-transition: 1ms     -ms-transform ease;
+           -o-transition: 1ms      -o-transform ease;
+              transition: 1ms         transform ease;
+    -webkit-transform: scale(0);
+         -moz-transform: scale(0);
+          -ms-transform: scale(0);
+           -o-transform: scale(0);
+              transform: scale(0);
+  }
+  
+  .scotch-modal-custom-animation.scotch-open
+  {
+    -webkit-transform: scale(1);
+         -moz-transform: scale(1);
+          -ms-transform: scale(1);
+           -o-transform: scale(1);
+              transform: scale(1);
+  }
